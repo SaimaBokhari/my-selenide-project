@@ -1,8 +1,13 @@
 package stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.*;
 import pages.TestPage;
+
+import static com.codeborne.selenide.Selenide.switchTo;
+import static org.junit.Assert.assertTrue;
 
 public class TestPageStepDefs {
 
@@ -76,6 +81,61 @@ public class TestPageStepDefs {
         Thread.sleep(2000);
     }
 
+    @Given("I get the list of US states and click on {string}")
+    public void i_get_the_list_of_us_states_and_click_on(String string) {
+        for(SelenideElement myState : testPage.allStates){
+           // System.out.println(myState.getText());
+            if(myState.getText().equals(string)){
+                myState.click();
+                break;
+            }
+        }
+    }
+
+    // Handling ALERTS
+    @Given("I click on alert prompt")
+    public void i_click_on_alert_prompt() {
+        testPage.jsPromptButton.click();
+    }
+    @Given("I enter {string} and click OK")
+    public void i_enter_and_click_ok(String string) {
+        WebDriverRunner.getWebDriver().switchTo().alert().sendKeys(string); // sending text
+        WebDriverRunner.getWebDriver().switchTo().alert().accept();  // OK
+
+    }
+    @Then("verify the result contains {string}")
+    public void verify_the_result_contains(String string) {
+        testPage.result.shouldHave(Condition.text(string));
+    }
+
+    // IFRAME step defs
+    @Given("I verify the page header contains {string} keyword")
+    public void i_verify_the_page_header_contains_keyword(String string) {
+        // This element is OUTSIDE the iframe
+        testPage.pageHeader.shouldHave(Condition.text(string));
+    }
+    @Given("I switch to the frame {int}")
+    public void i_switch_to_the_frame(Integer int1) {
+       // WebDriverRunner.getWebDriver().switchTo().frame(int1-1); // 1-1=0 => index 0
+         WebDriverRunner.getWebDriver().switchTo().frame(testPage.iframe);
+    }
+    @Given("I click on Back to TechProEducation.com")
+    public void i_click_on_back_to_tech_pro_education_com() {
+        // This element is INSIDE the iframe
+        testPage.backToTechPro.click();
+    }
+
+    // NEW WINDOW
+
+    @When("I switch to window {int}")
+    public void i_switch_to_window(Integer int1) {
+        switchTo().window(int1-1);  //
+    }
+    @Then("I get the URL of the page and verify it contains {string}")
+    public void i_get_the_url_of_the_page_and_verify_it_contains(String string) {
+        System.out.println(WebDriverRunner.url());
+        assertTrue(WebDriverRunner.url().contains(string));
+    }
 
 
 }
