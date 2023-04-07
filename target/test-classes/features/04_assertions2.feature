@@ -2,6 +2,7 @@
 Feature: assertions2
   Scenario: TC01_search for tesla
     Given I navigate to "https://www.google.com/"
+    # if a pop up appears on google page, locate the "accept all" option, handle it first
     When I search for "Tesla"
     Then verify if page source contains "Tesla"
     Then verify the result should contain "About" keyword

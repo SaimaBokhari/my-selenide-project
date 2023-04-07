@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.*;
 import pages.GooglePage;
@@ -36,6 +37,7 @@ public class GoogleStepDefs {
     }
     @Then("I hold the browser open")
     public void i_hold_the_browser_open() {
+        Configuration.holdBrowserOpen=true;
     }
 
     // ********* 04_assertions2 stepdefs ************

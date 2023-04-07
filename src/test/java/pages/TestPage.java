@@ -15,7 +15,7 @@ public class TestPage {
 //    }
 
     // 2nd way: Locating the elements using
-    // Webelemnet -> SelenideElement
+    // Webelement -> SelenideElement
     public SelenideElement username = $(By.id("exampleInputEmail1"));
 
     public SelenideElement password = $(By.id("exampleInputPassword1"));
@@ -23,4 +23,27 @@ public class TestPage {
     public SelenideElement submitButton = $(By.xpath("//button[@type='submit']"));
 
     public SelenideElement logoutLink = $(By.partialLinkText("Logout"));
+
+    // Locating CHECKBOX
+    public SelenideElement checkbox1 = $(By.id("box1"));
+
+    public SelenideElement checkbox2 = $(By.id("box2"));
+
+    // Locating RADIO BUTTON
+
+    public SelenideElement red = $(By.id("red"));
+    public SelenideElement yellow = $(By.id("yellow"));
+    public SelenideElement football = $(By.id("football"));
+
+    // Locating DROPDOWN elements
+
+    public SelenideElement year = $(By.id("year"));
+    public SelenideElement month = $(By.id("month"));
+    public SelenideElement day = $(By.id("day"));
+
+
+
+
+
+
 }

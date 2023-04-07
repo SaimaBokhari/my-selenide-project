@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
         features = "./src/test/resources/features",  // Path of Features folder
         glue = {"stepdefinitions"},
         dryRun = false,
-        tags = "@assertions2"
+        tags = "@dropdown"
 )
 public class Runner {
 }

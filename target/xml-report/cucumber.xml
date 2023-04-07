@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="17.482" tests="1" skipped="0" failures="0" errors="0">
-<testcase classname="assertions2" name="TC01_search for tesla" time="17.246">
+<testsuite name="Cucumber" time="13.277" tests="1" skipped="0" failures="0" errors="0">
+<testcase classname="dropdown" name="TC01_selecting birth year" time="13.057">
 <system-out><![CDATA[
-Given I navigate to "https://www.google.com/"...............................passed
-When I search for "Tesla"...................................................passed
-Then verify if page source contains "Tesla".................................passed
-Then verify the result should contain "About" keyword.......................passed
-Then the first result on the page sections should contains "Tesla"..........passed
+Given I navigate to "https://testcenter.techproeducation.com/index.php?page=dropdown".passed
+And I select the year as 2000...............................................passed
+And I select the month as "October".........................................passed
+And I select the day as 10..................................................passed
+And I hold the browser open.................................................passed
 ]]></system-out>
 </testcase>
 </testsuite>
