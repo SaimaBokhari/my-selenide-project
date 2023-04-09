@@ -215,7 +215,7 @@ public class TestPageStepDefs {
         System.out.println(path);
         File fullPath = new File(path);
 
-        // Selecting the file
+        // Selecting the file by using uploadFile() function .. new in selenide, not in selenium
         $(By.id("file-upload")).uploadFile(fullPath);  // using the webelement directly
         // testPage.chooseFile.uploadFile(fullPath); //  using POM
 
@@ -229,6 +229,26 @@ public class TestPageStepDefs {
         $(By.xpath("//h3")).shouldHave(Condition.text("File Uploaded!"));
     }
 
+//   AMAZON webElements are put here directly instead of a separate page coz of lack of time
+    @And("I click on Amazon logo")
+    public void iClickOnAmazonLogo() {
+        // Locating the element with JS
+        executeJavaScript("document.getElementById('nav-logo-sprites').click();");
+    }
+    @And("I scroll down to footer section")
+    public void iScrollDownToFooterSection() {
+        SelenideElement footer =$(By.xpath("//table[@class='navFooterMoreOnAmazon']"));
+//        Selenide.executeJavaScript()
+        executeJavaScript("arguments[0].scrollIntoView(true);",footer);
+    }
 
+    @And("I click on {string} by JS on amazon table")
+    public void iClickOnByJSOnAmazonTable(String specificSection) {
+        //SelenideElement element = $(By.xpath("//table[@class='navFooterMoreOnAmazon']//*[contains(text(), 'Goodreads')]"));  // hard coding
+        SelenideElement element = $(By.xpath("//table[@class='navFooterMoreOnAmazon']//*[contains(text(), '"+specificSection+"')]"));  // dynamic coding
+
+        //executeJavaScript("arguments[0].click();", element);
+        executeJavaScript("arguments[0].click();",element);
+    }
 
 }
