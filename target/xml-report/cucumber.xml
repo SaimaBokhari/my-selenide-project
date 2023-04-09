@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="19.184" tests="1" skipped="0" failures="0" errors="0">
-<testcase classname="iframe" name="TC01_iframe" time="18.934">
+<testsuite name="Cucumber" time="17.989" tests="1" skipped="0" failures="0" errors="0">
+<testcase classname="file upload" name="TC01_file upload" time="17.722">
 <system-out><![CDATA[
-Given I navigate to "https://testcenter.techproeducation.com/index.php?page=iframe".passed
-And I verify the page header contains "iframe" keyword......................passed
-And I switch to the frame 1.................................................passed
-And I click on Back to TechProEducation.com.................................passed
+Given I navigate to "https://the-internet.herokuapp.com/upload".............passed
+And I upload the file on this path "/Desktop/logo.jpeg".....................passed
+And I wait for 3 seconds....................................................passed
+And I verify the file is uploaded...........................................passed
+And I capture the screenshot of the page....................................passed
 And I hold the browser open.................................................passed
-When I switch to window 2...................................................passed
-And I wait for 5 seconds....................................................passed
-Then I get the URL of the page and verify it contains "techproeducation"....passed
 ]]></system-out>
 </testcase>
 </testsuite>

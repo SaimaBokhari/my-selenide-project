@@ -4,9 +4,15 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import pages.TestPage;
 
-import static com.codeborne.selenide.Selenide.switchTo;
+import java.io.File;
+import java.time.Duration;
+
+import static com.codeborne.selenide.Selenide.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class TestPageStepDefs {
@@ -136,6 +142,93 @@ public class TestPageStepDefs {
         System.out.println(WebDriverRunner.url());
         assertTrue(WebDriverRunner.url().contains(string));
     }
+
+    // ACTIONS
+    @When("I drag the source in the target")
+    public void i_drag_the_source_in_the_target() {
+//        actions()
+//                .dragAndDrop(testPage.source, testPage.target)//moving source to target
+//                .build()//
+//                .perform();//required to execute the commands
+
+//        OR
+
+//        actions()
+//                .clickAndHold(testPage.source)
+//                .moveToElement(testPage.target)
+//                .build()
+//                .perform();
+
+//        OR we can move teh source to the specific coordinates
+        actions()
+                .dragAndDropBy(testPage.source, 305,167)
+                .build()
+                .perform();
+
+    }
+
+    @Given("I scroll the page down")
+    public void i_scroll_the_page_down() {
+        actions()
+                .sendKeys(Keys.PAGE_DOWN)
+                .build()
+                .perform();
+
+//        OR TO MOVE A LITTLE BIT
+        actions()
+                .sendKeys(Keys.ARROW_DOWN)
+                .build()
+                .perform();
+    }
+
+    //    EXPLICIT WAIT
+    @Given("I click on start button")
+    public void i_click_on_start_button() {
+        testPage.startButton.click();
+    }
+    @Then("verify the Hello World! text is displayed")
+    public void verify_the_hello_world_text_is_displayed() {
+//        FAILS WITH NO WAIT
+//        System.out.println("TEXT =>>> "+testPage.helloWorld.getText());// Hello World!
+//        Assert.assertEquals("Hello World!",testPage.helloWorld.getText());//FAIL
+
+//        TO FIX THE ISSUE THE BEST OPTION IS EXPLICIT WAIT BECAUSE IT IS DYNAMIC
+//        1. Handle with WebDriverWait class
+//        WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofSeconds(20));
+//        wait.until(ExpectedConditions.visibilityOf(testPage.helloWorld));
+//        Assert.assertEquals("Hello World!",testPage.helloWorld.getText());//PASS
+
+
+//        2. selenide wait
+//        testPage.helloWorld.should(visible,Duration.ofSeconds(20)); //OR
+        testPage.helloWorld.should(Condition.visible, Duration.ofSeconds(20));
+        assertEquals("Hello World!",testPage.helloWorld.getText());
+        testPage.helloWorld.should(Condition.text("fake test"));//FAIL
+    }
+
+    // FILE UPLOAD STEPS
+    @Given("I upload the file on this path {string}")
+    public void i_upload_the_file_on_this_path(String string) {
+        // Getting the file path using File class coming from Java
+        //                               user directory + filepath = full path
+        String path = System.getProperty("user.home")+string;
+        System.out.println(path);
+        File fullPath = new File(path);
+
+        // Selecting the file
+        $(By.id("file-upload")).uploadFile(fullPath);  // using the webelement directly
+        // testPage.chooseFile.uploadFile(fullPath); //  using POM
+
+
+        // click on the upload button
+        $(By.id("file-submit")).click();  // using the webelement
+//        testPage.uploadButton.click(); //  using POM
+    }
+    @Given("I verify the file is uploaded")
+    public void i_verify_the_file_is_uploaded() {
+        $(By.xpath("//h3")).shouldHave(Condition.text("File Uploaded!"));
+    }
+
 
 
 }

@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import static com.codeborne.selenide.Selenide.*;
@@ -54,6 +55,22 @@ public class TestPage {
     public SelenideElement backToTechPro = $(By.xpath("//a[@type='button']"));
 
     public SelenideElement iframe = $(By.xpath("//iframe"));
+    public SelenideElement backToTechpro = $(By.xpath("//a[@type='button']"));
+
+    //    ACTIONS
+    public SelenideElement source = $(By.id("draggable"));
+    public SelenideElement target = $(By.id("droppable"));
+
+    //    EXPLICIT WAIT
+    public SelenideElement startButton = $(By.xpath("//div[@id='start']//button"));
+    public SelenideElement helloWorld =$(By.xpath("//div[@id='finish']//h4"));
+
+    //    SCREENSHOT
+    public SelenideElement upcomingPrograms = $(By.id("MjI4NDoxMDk1-1"));
+
+    // FILE UPLOAD
+    public SelenideElement chooseFile = $(By.id("file-upload"));
+    public SelenideElement uploadButton = $(By.id("file-submit"));
 
 
 }
